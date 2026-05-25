@@ -1,4 +1,3 @@
 <Solution>
-  <Project Path="LogicalShess/LogicalShess.csproj" />
-
+  <Project Path="ChessTeam\ChessTeam.csproj" />
 </Solution>

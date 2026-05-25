@@ -1,4 +1,4 @@
-namespace LogicalShess.DataShess;
+namespace ChessTeam.LogicalChess;
 
 public sealed class PositionChess(int x, int y)
 {

@@ -1,6 +1,6 @@
-﻿using LogicalShess.DataShess;
+﻿using ChessTeam.LogicalChess;
 
-namespace LogicalShess;
+namespace ChessTeam;
 
 internal class Program
 {

@@ -1,7 +1,7 @@
 using System;
-using LogicalShess.DataShess;
+using ChessTeam.LogicalChess;
 
-namespace LogicalShess;
+namespace ChessTeam;
 
 public sealed class CampChess
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace LogicalShess.DataShess;
+namespace ChessTeam.LogicalChess;
 
 public static class Const
 {

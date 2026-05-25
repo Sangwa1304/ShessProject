@@ -1,4 +1,4 @@
-namespace LogicalShess;
+namespace ChessTeam;
 
 public enum TypeCamp
 {

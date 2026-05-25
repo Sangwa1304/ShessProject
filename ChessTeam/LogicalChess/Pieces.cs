@@ -1,4 +1,4 @@
-namespace LogicalShess.DataShess;
+namespace ChessTeam.LogicalChess;
 
 public enum TypePiece
 {
