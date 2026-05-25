@@ -1,6 +1,6 @@
-namespace ChessTeam.LogicalChess;
+namespace ChessTeam.ChessLogical;
 
-public enum TypePiece
+public enum TypeChess
 {
     Pion,
     Cavalier,
