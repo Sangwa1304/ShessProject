@@ -1,0 +1,13 @@
+# Architecture
+
+*ShessProject
+    - DataShess
+        Chess.cs
+        /*
+            Representer un chess,
+            sa position, son type  et sa dircetion
+        */
+        TypeShess.cs
+        PositionChess.cs
+        BordChess.cs
+    
