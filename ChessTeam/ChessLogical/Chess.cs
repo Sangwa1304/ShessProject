@@ -1,3 +1,4 @@
+using ChessTeam.ChessMoving;
 using System;
 
 namespace ChessTeam.ChessLogical;
@@ -10,12 +11,24 @@ public class Chess
     public TypeCamp? Camp{ get; private set; }
     public bool Enabled { get; private set; }
     public bool Promotion { get; private set; } = false;
-
-    public Chess(ChessPosition position, TypeChess type)
+    public List<ChessPosition> NextPositions { get => Moving.RunFonc(Type, Camp, Position);}
+    public Chess(ChessPosition position, TypeChess type, TypeCamp? camp = null)
     {
         Type = type;
+
         Position = position;
+
         Enabled = true;
+
+        if(camp != null)
+            Camp = camp;
+        
+    }
+
+    public override string ToString()
+    {
+        return $"{Type} : {Position}";
+        ;
     }
     private void promote(TypeChess type)
     {

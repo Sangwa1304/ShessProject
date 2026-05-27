@@ -4,28 +4,34 @@ namespace ChessTeam.ChessLogical;
 
 public sealed class ChessCamp
 {
-    public readonly static Dictionary<TypeCamp,ChessCamp> Camps = new();
-    private int NbreCamps = 0;
+    
+    private static int NbreCamps = 0;
     private static bool IsWhite = true;
-    public TypeCamp Camp {get;}
 
-    public readonly List<Chess> AllsPieces;
+    public TypeCamp Camp {get;}
+    private static bool Init = false;
+
+    public readonly List<Chess> AllsPiecesForThisCamp;
 
     public ChessCamp(List<Chess> allsPieces)
     {
         if (NbreCamps >= 2)
+
             throw new Exception("Pas plus de 2 Camps permis");
-        
-        Camp = IsWhite? TypeCamp.W : TypeCamp.B;
+        else if (NbreCamps == 1)
+            Init = true;
+        Camp = IsWhite ? TypeCamp.W : TypeCamp.B;
         if(IsWhite)
             IsWhite = false;
         NbreCamps++;
-        AllsPieces = [.. from Chess chess in allsPieces select new Chess(chess.Position,chess.Type)];
-        Camps.Add(Camp,this);
+        AllsPiecesForThisCamp = [.. from Chess chess in allsPieces select new Chess(chess.Position,chess.Type,Camp)];
+        Conservateur.Initialisateur.AllsPiecesAtCamps.Add(Camp,this);
     }
 
     internal static bool Initialization()
     {
+        if (Init)
+            return true;
         List<Chess> allsPieceW =
         [
             new Chess(new ChessPosition(1,1),TypeChess.Tour),

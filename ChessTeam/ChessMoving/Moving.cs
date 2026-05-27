@@ -7,26 +7,46 @@ namespace ChessTeam.ChessMoving
 {
     public static class Moving
     {
-        public delegate List<ChessPosition> Fonc(TypeCamp camp, ChessPosition position);
-        public static readonly Dictionary<TypeChess, Fonc> Fonction = new()
+        private static readonly Dictionary<TypeChess, Func<TypeCamp?,ChessPosition,List<ChessPosition>>> Foncs= new()
             {
-                
+            [TypeChess.Pion]=Pion,
+            [TypeChess.Roi] = Roi,
+            [TypeChess.Reine] = Reine,
+            [TypeChess.Cavalier] = Cavalier,
+            [TypeChess.Tour] = Tour,
+            [TypeChess.Fou] = Fou
             };
-        public static List<ChessPosition> Pion(TypeChess camp,ChessPosition pion)
+        public static  List<ChessPosition> RunFonc(TypeChess type, TypeCamp? camp, ChessPosition position) 
         {
+            
+           
+            return ChessPosition.Sorts(Foncs[type](camp, position));
+        }
+        private static List<ChessPosition> Pion(TypeCamp? camp,ChessPosition pion)
+        {
+            
             List<ChessPosition> all = [];
+            if (camp == null)
+                throw new ArgumentException("La valeur null non per,is pour les pions");
             if(camp == TypeCamp.W)
             {
-
+               
+                Add(pion.X +1, pion.Y + 1, ref all);
+                Add(pion.X -1, pion.Y + 1, ref all);
+                Add(pion.X   , pion.Y + 2, ref all);
+                Add(pion.X, pion.Y + 1, ref all);
             }
             else
             {
-               
+                Add(pion.X -1, pion.Y - 1, ref all);
+                Add(pion.X +1, pion.Y - 1, ref all);
+                Add(pion.X   , pion.Y - 2, ref all);
+                Add(pion.X, pion.Y + 1, ref all);
             }
             return all;
             //mm
         }
-        public static List<ChessPosition> Cavalier(TypeCamp camp,ChessPosition cavalier)
+        private static List<ChessPosition> Cavalier(TypeCamp? camp,ChessPosition cavalier)
         {
             List<ChessPosition> all = [];
 
@@ -47,15 +67,19 @@ namespace ChessTeam.ChessMoving
             //mm code
         }
 
-        private static void Ocure(int iteration, Tuple<int,int> value,ChessPosition p, ref List<ChessPosition> container)
+        private static void Iterate(int iteration, Tuple<int,int> value,ChessPosition position, ref List<ChessPosition> container)
         {
+            var p = position;
             for (int i = 0; i < iteration; i++)
             {
-                Add(p.X + value.Item1, p.Y + value.Item2, ref container);
+                if(Add(p.X + value.Item1, p.Y + value.Item2, ref container))
+                {
+                    p = new(p.X + value.Item1, p.Y + value.Item2);
+                }
             }
         }
 
-        public static List<ChessPosition> Reine(TypeCamp camp,ChessPosition reine)
+        private static List<ChessPosition> Reine(TypeCamp? camp,ChessPosition reine)
         {
             List<ChessPosition> all = [];
             Transfert(Roi(camp, reine), ref all);
@@ -65,7 +89,7 @@ namespace ChessTeam.ChessMoving
             //mm code
         }
 
-        public static List<ChessPosition> Roi(TypeCamp camp,ChessPosition roi)
+        private static List<ChessPosition> Roi(TypeCamp? camp,ChessPosition roi)
         {
             List<ChessPosition> all = [];
             // en X :
@@ -84,25 +108,25 @@ namespace ChessTeam.ChessMoving
             return all;
             //mm code
         }
-        public static List<ChessPosition> Fou(TypeCamp camp,ChessPosition fou)
+        private static List<ChessPosition> Fou(TypeCamp? camp,ChessPosition fou)
         {
             List<ChessPosition> all = [];
 
-            Ocure(8, new( 1, 1), fou, ref all);
-            Ocure(8, new(-1,-1), fou, ref all);
-            Ocure(8, new( 1,-1), fou, ref all);
-            Ocure(8, new(-1, 1), fou, ref all);
+            Iterate(8, new( 1, 1), fou, ref all);
+            Iterate(8, new(-1,-1), fou, ref all);
+            Iterate(8, new( 1,-1), fou, ref all);
+            Iterate(8, new(-1, 1), fou, ref all);
 
             return all;
             //mm code
         }
-        public static List<ChessPosition> Tour(TypeCamp camp,ChessPosition tour)
+        private static List<ChessPosition> Tour(TypeCamp? camp,ChessPosition tour)
         {
             List<ChessPosition> all = [];
-            Ocure(8, new(-1, 0), tour, ref all);
-            Ocure(8, new( 1, 0), tour, ref all);
-            Ocure(8, new( 0, 1), tour, ref all);
-            Ocure(8, new( 0,-1), tour, ref all);
+            Iterate(8, new(-1, 0), tour, ref all);
+            Iterate(8, new( 1, 0), tour, ref all);
+            Iterate(8, new( 0, 1), tour, ref all);
+            Iterate(8, new( 0,-1), tour, ref all);
             return all;
             //mm code
         }
