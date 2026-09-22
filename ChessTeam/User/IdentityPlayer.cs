@@ -4,22 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Text;
 
-namespace ChessTeam.User
-{
-    public partial class IdentityPlayer
-    {
-        public IdentityPlayer( string? name = null)
-        {
-            string n;
-            if (name != null)
-                n = name;
-            else
-                n = HachNamePlayer;
-            Name = n;
-        }
+namespace ChessTeam.User;
 
-        public string Name { get; private set; }
-        public int Id { get; } = IdClass.Id;
-        public static string HachNamePlayer { get => "Player_"+Haching.GetHach(); }
-    }
+public partial class IdentityPlayer(string? name = null)
+{
+    public string Name { get; private set; }= name ?? HachNamePlayer;
+    public int Id { get => Name.GetHashCode(); }
+    private static string HachNamePlayer { get => "Player_" + Haching.GetHach(); }
 }

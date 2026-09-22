@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="ChessTeam.Tests/ChessTeam.Tests.csproj" />
   <Project Path="ChessTeam\ChessTeam.csproj" />
 </Solution>
