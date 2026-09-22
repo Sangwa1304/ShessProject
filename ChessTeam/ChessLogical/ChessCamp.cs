@@ -32,6 +32,7 @@ public sealed class ChessCamp
         Camp = !_InitW && !_InitB ? TypeCamp.W : _InitW && !_InitB ? TypeCamp.B : throw new Exception("le camp est non determiner veuillez reinitialiser");
 
         NbreCamps++;
+        AllsPiecesForThisCamp = new();
         if(Initialization())
             Conservateur.Initialisateur.Add(Camp,GetChess);
     }

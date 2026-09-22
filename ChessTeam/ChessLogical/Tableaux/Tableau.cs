@@ -1,6 +1,6 @@
 namespace ChessTeam.ChessLogical.Tableaux;
 
-internal class Tableau
+internal static class Tableau
 {
     public enum Carreau
     {

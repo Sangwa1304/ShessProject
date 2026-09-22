@@ -32,7 +32,7 @@ public class Chess : IEquatable<Chess>
         return [..from e in p where !Alies.Contains(e) select e];
     }
 
-    private IEnumerable<> Cibles()
+    private IEnumerable<ChessPosition> Cibles()
     {
         var p = Moving.GetNextPositions(Type, Camp, Position);
         var ennemy = GetAnotherChessPositionsFromEnnemyCamp();
