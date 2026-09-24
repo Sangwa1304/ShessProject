@@ -29,7 +29,7 @@ public class ChessTests
         Chess.PositionChanged += Chess_PositionChanged;
         Chess.PromotionAvailabled += Chess_PromotionAvailabled;
         // Arrange
-        var chess = new Chess(new(1, 7), Types.TypeChess.Pion, Types.TypeCamp.W);
+        Chess chess = new (new(1, 7), Types.TypeChess.Pion, Types.TypeCamp.W);
 
         Assert.True(chess.Enabled);
 
@@ -76,8 +76,8 @@ public class ChessTests
 
         List<Chess> enumerables = new();
         IEnumerable<Chess> es = Conservateur.Initialisateur.AllsPiecesAtCamps;
-        enumerables.AddRange(Camp1.AllsPiecesForThisCamp);
-        enumerables.AddRange(Camp2.AllsPiecesForThisCamp);
+        enumerables.AddRange(Camp1.GetChess());
+        enumerables.AddRange(Camp2.GetChess());
 
         foreach (Chess c in enumerables)
         {

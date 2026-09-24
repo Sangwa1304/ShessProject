@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="ChessTeam.Tests/ChessTeam.Tests.csproj" />
   <Project Path="ChessTeam\ChessTeam.csproj" />
+  <Project Path="WpfChess/WpfChess.csproj" Id="188ccc08-38ce-4400-ac64-f55f606da759" />
 </Solution>

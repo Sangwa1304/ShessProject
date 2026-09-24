@@ -1,0 +1,670 @@
+﻿<Window x:Class="WpfChess.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfChess"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        MinHeight="550"
+        SizeChanged="Window_SizeChanged"
+       Background="#3a3a3b"
+        MinWidth="550" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="375*"/>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="rowMenu1" Height="40"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition x:Name="rowMenu2" Height="20"/>
+        </Grid.RowDefinitions>
+        <Menu 
+            Background="#14191f" Grid.ColumnSpan="2">
+            <BulletDecorator>
+
+            </BulletDecorator>
+        </Menu>
+
+        <Grid 
+            
+            Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border 
+                x:Name="Tableau"
+                Background="Black"
+                MinHeight="500"
+                MinWidth="500"
+                SizeChanged="Tableau_SizeChanged"
+                MaxHeight="700"
+                MaxWidth="700"
+                Padding="10"
+                Grid.Column="1">
+                <Border 
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    CornerRadius="4"
+                    Background="#2c1607">
+                    <Grid x:Name="Carreaux">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="A1" Background="Gray" Grid.Column="0" Grid.Row="7" Margin="2">
+
+                            <Button ClickMode="Press" IsEnabled="{Binding A1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        
+                        <Border x:Name="A2" Grid.Column="0" Grid.Row="6" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="A3" Grid.Column="0" Grid.Row="5" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="A4" Grid.Column="0" Grid.Row="4" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="A5" Grid.Column="0" Grid.Row="3" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="A6" Grid.Column="0" Grid.Row="2" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="A7" Grid.Column="0" Grid.Row="1" Background="Gray"  Margin="2">
+                        
+                            <Button ClickMode="Press" IsEnabled="{Binding A7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A7.ChessObject}"/>
+                                </Button.Background>
+
+                            </Button>
+                        </Border>
+                        <Border x:Name="A8" Grid.Column="0" Grid.Row="0" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding A8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding A8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+
+
+                        <Border x:Name="B1" Grid.Column="1" Grid.Row="7" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="B2" Grid.Column="1" Grid.Row="6" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="B3" Grid.Column="1" Grid.Row="5" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="B4" Grid.Column="1" Grid.Row="4" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="B5" Grid.Column="1" Grid.Row="3" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="B6" Grid.Column="1" Grid.Row="2" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="B7" Grid.Column="1" Grid.Row="1" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="B8" Grid.Column="1" Grid.Row="0" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding B8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding B8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+
+
+                        <Border x:Name="C1" Grid.Column="2" Grid.Row="7" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="C2" Grid.Column="2" Grid.Row="6" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="C3" Grid.Column="2" Grid.Row="5" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="C4" Grid.Column="2" Grid.Row="4" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="C5" Grid.Column="2" Grid.Row="3" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="C6" Grid.Column="2" Grid.Row="2" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="C7" Grid.Column="2" Grid.Row="1" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="C8" Grid.Column="2" Grid.Row="0" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding C8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding C8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="D1" Grid.Column="3" Grid.Row="7" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="D2" Grid.Column="3" Grid.Row="6" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="D3" Grid.Column="3" Grid.Row="5" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="D4" Grid.Column="3" Grid.Row="4" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="D5" Grid.Column="3" Grid.Row="3" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="D6" Grid.Column="3" Grid.Row="2" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="D7" Grid.Column="3" Grid.Row="1" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="D8" Grid.Column="3" Grid.Row="0" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding D8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding D8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="E1" Grid.Column="4" Grid.Row="7" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="E2" Grid.Column="4" Grid.Row="6" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="E3" Grid.Column="4" Grid.Row="5" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="E4" Grid.Column="4" Grid.Row="4" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="E5" Grid.Column="4" Grid.Row="3" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="E6" Grid.Column="4" Grid.Row="2" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="E7" Grid.Column="4" Grid.Row="1" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="E8" Grid.Column="4" Grid.Row="0" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding E8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding E8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+
+                        <Border x:Name="F1" Grid.Column="5" Grid.Row="7" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="F2" Grid.Column="5" Grid.Row="6" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="F3" Grid.Column="5" Grid.Row="5" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="F4" Grid.Column="5" Grid.Row="4" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="F5" Grid.Column="5" Grid.Row="3" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="F6" Grid.Column="5" Grid.Row="2" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="F7" Grid.Column="5" Grid.Row="1" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="F8" Grid.Column="5" Grid.Row="0" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding F8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding F8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+
+
+                        <Border x:Name="H1" Grid.Column="6" Grid.Row="7" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="H2" Grid.Column="6" Grid.Row="6" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="H3" Grid.Column="6" Grid.Row="5" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="H4" Grid.Column="6" Grid.Row="4" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="H5" Grid.Column="6" Grid.Row="3" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="H6" Grid.Column="6" Grid.Row="2" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="H7" Grid.Column="6" Grid.Row="1" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border> 
+                        <Border x:Name="H8" Grid.Column="6" Grid.Row="0" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding H8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding H8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+
+                        <Border x:Name="G1" Grid.Column="7" Grid.Row="7" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G1.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G1.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G2" Grid.Column="7" Grid.Row="6" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G2.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G2.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G3" Grid.Column="7" Grid.Row="5" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G3.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G3.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G4" Grid.Column="7" Grid.Row="4" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G4.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G4.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G5" Grid.Column="7" Grid.Row="3" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G5.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G5.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G6" Grid.Column="7" Grid.Row="2" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G6.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G6.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G7" Grid.Column="7" Grid.Row="1" Background="Black" Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G7.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G7.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                        <Border x:Name="G8" Grid.Column="7" Grid.Row="0" Background="Gray"  Margin="2">
+                            
+                            <Button ClickMode="Press" IsEnabled="{Binding G8.IsEnabled}" Click="Button_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding G8.ChessObject}"/>
+                                </Button.Background>
+                            
+                            </Button>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+        <Border 
+            Grid.Row="2" 
+            Background="#14191f" Grid.ColumnSpan="2"/>
+    </Grid>
+
+</Window>

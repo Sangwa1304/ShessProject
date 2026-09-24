@@ -79,7 +79,7 @@ public struct ChessPosition : IEquatable<ChessPosition>
     /// <returns></returns>
     public override readonly string ToString()
     {
-        return $" X :{X} Y : {Y} : {Tableau.GetCarreau(this)}";
+        return $" X :{X} Y : {Y} : {Tableaux.Tableaux.GetCarreau(this)}";
     }
 
     /// <summary>

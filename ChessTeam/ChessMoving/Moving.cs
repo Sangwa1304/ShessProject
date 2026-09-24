@@ -60,15 +60,19 @@ public static class Moving
         if (camp == TypeCamp.W)
         {
 
+            // the roque 
             TryAdd(pion.X + 1, pion.Y + 1, ref all);
             TryAdd(pion.X - 1, pion.Y + 1, ref all);
+
             TryAdd(pion.X, pion.Y + 2, ref all);
             TryAdd(pion.X, pion.Y + 1, ref all);
         }
         else
         {
+            // the roque 
             TryAdd(pion.X - 1, pion.Y - 1, ref all);
             TryAdd(pion.X + 1, pion.Y - 1, ref all);
+
             TryAdd(pion.X, pion.Y - 2, ref all);
             TryAdd(pion.X, pion.Y + 1, ref all);
         }
@@ -161,6 +165,9 @@ public static class Moving
         TryAdd(roi.X - 1, roi.Y + 1, ref all);
         TryAdd(roi.X + 1, roi.Y - 1, ref all);
 
+        // permutation sous condition 
+        TryAdd(roi.X - 2, roi.Y, ref all);
+        TryAdd(roi.X + 2, roi.Y, ref all);
         return all;
         //mm code
     }

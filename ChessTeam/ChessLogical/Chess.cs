@@ -1,11 +1,17 @@
 using System;
 using ChessTeam.ChessLogical.Types;
 using ChessTeam.ChessMoving;
+using static ChessTeam.ChessLogical.Tableaux.Tableaux;
 
 namespace ChessTeam.ChessLogical;
 
 public class Chess : IEquatable<Chess>
 {
+    public bool SpecialPropertyRoque { get; private set; } = false;
+    private static Chess? LastMoveChess;
+    private ChessPosition? LastPosition;
+    private bool _isMove = false; // property for roi et tour 
+    public bool IsMove { get => _isMove; }
     public int Id { get; } = IdChess.Id;
     public TypeChess Type { get; private set; }
     public ChessPosition Position { get; private set; }
@@ -27,9 +33,95 @@ public class Chess : IEquatable<Chess>
 
     private List<ChessPosition> Nexts()
     {
-        var p = Moving.GetNextPositions(Type, Camp, Position);
+        var p = Moving.GetNextPositions(Type, Camp, Position).ToList();
         var Alies = GetAnotherChessPositionsFromThisCamp();
+        if(Type== TypeChess.Pion) VerifieRoqueForPion(ref p);
+        if (Type == TypeChess.Roi) VerifieSpecialPermutation(ref p);
         return [..from e in p where !Alies.Contains(e) select e];
+    }
+
+    private void VerifieSpecialPermutation(ref List<ChessPosition> p)
+    {
+        if (!IsMove)
+        {
+            return; 
+        }
+
+    }
+
+    private void VerifieRoqueForPion(ref List<ChessPosition> p)
+    {
+        List<ChessPosition> pos = new(),
+            direct = new();
+        int v = Camp == TypeCamp.W ? 1 : -1;
+        try
+        {
+            pos.Add(new(Position.X - 1, Position.Y + v));
+        }
+        catch(Exception)
+        { }
+        try
+        { 
+            pos.Add(new(Position.X + 1, Position.Y + v)); 
+        }
+        catch (Exception) { }
+        try
+        {
+            direct.Add(new(Position.X - 1, Position.Y));
+        }
+        catch (Exception) { }
+        try
+        {
+            direct.Add(new(Position.X + 1, Position.Y));
+        }
+        catch (Exception) { }
+
+        if (LastMoveChess == null || LastMoveChess.LastPosition== null) 
+        {
+            DeleteRoque(pos, ref p);
+             return;
+        }
+        else
+        {
+            if (LastMoveChess.Type == TypeChess.Pion && IsEnnemy(LastMoveChess) &&
+                (LastMoveChess.LastPosition?.Y == LastMoveChess.Position.Y + 2 ||
+                    LastMoveChess.LastPosition?.Y == LastMoveChess.Position.Y - 2))
+            {
+                foreach(var ps in direct)
+                {
+                    if(LastMoveChess.Position == ps)
+                    {
+                        DeleteRoque(pos, ref p,ps);
+                        return;
+                    }
+                }
+            }
+            DeleteRoque(pos, ref p);
+            return;
+            
+        }
+    }
+
+    private void DeleteRoque(List<ChessPosition> direct, ref List<ChessPosition> p, 
+        ChessPosition? except = null)
+    {
+        foreach(var po in direct)
+        {
+            try
+            {
+                if (except != null && po == except) continue;
+                p.Remove(po);
+            }
+            catch(Exception)
+            {
+
+            }
+        }
+    }
+
+    private bool IsEnnemy(Chess lastMoveChess)
+    {
+        return lastMoveChess.Camp == Camp;
     }
 
     private IEnumerable<ChessPosition> Cibles()
@@ -72,13 +164,23 @@ public class Chess : IEquatable<Chess>
         return false;
         // une avertissement Ici 
     }
-    public void Move(ChessPosition newPosition)
+    public void Move(ChessPosition? position = null, Carreau? carreau =null)
     {
+        ChessPosition newPosition;
+        if (position == null && carreau == null) return;
+        if(carreau != null)
+        {
+            newPosition = Tableaux.Tableaux.GetPosition(carreau:carreau);
+        }
+        else
+        {
+            newPosition = position?? throw new ArgumentNullException(nameof(position));
+        }
         var memory = new LastChessEventArgs(Camp,Type,Position);
 
         if(!NextPositions.Contains(newPosition))
         {
-            throw new ArgumentException(nameof(newPosition));
+            return;
         }
         //Position.Reposition(newPosition.X, newPosition.Y);
         Position = newPosition;
@@ -87,15 +189,24 @@ public class Chess : IEquatable<Chess>
             Promotion = true;
             PromotionAvailabled?.Invoke(this,new());
         }
-        PositionChanged?.Invoke(this,memory);
+
+        LastPosition = memory.Position;
+        LastMoveChess = this;
+        _isMove = true;
+
+        var task = Task.Run(() => 
+        {
+            Conservateur.Initialisateur.Informechange(Tableaux.Tableaux.GetCarreau(Position), Tableaux.Tableaux.GetCarreau(memory.Position));
+            PositionChanged?.Invoke(this, memory); 
+        });
     }
 
-    private IEnumerable<ChessPosition> GetAnotherChessPositionsFromThisCamp()
+    public IEnumerable<ChessPosition> GetAnotherChessPositionsFromThisCamp()
     {
         return [.. from e in Conservateur.Initialisateur.AllsPiecesForCamp(Camp) select e.Position];
     }
 
-    private IEnumerable<ChessPosition> GetAnotherChessPositionsFromEnnemyCamp()
+    public IEnumerable<ChessPosition> GetAnotherChessPositionsFromEnnemyCamp()
     {
         
         return [.. from e in Conservateur.Initialisateur.AllsPiecesForCamp(Camp == TypeCamp.W ? TypeCamp.B: TypeCamp.W) select e.Position];

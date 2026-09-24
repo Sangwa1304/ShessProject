@@ -22,7 +22,7 @@ public sealed class ChessCamp
     private static bool _InitB = false;
     private static bool InitB { get { if (_InitB) return true; _InitB = true; return false; } }
     private static bool Init{get => _InitB && _InitW;}
-    public List<Chess> AllsPiecesForThisCamp;
+    private List<Chess> AllsPiecesForThisCamp;
 
     public ChessCamp()
     {
@@ -87,7 +87,7 @@ public sealed class ChessCamp
         }
         if (!InitB)
         {
-            AllsPiecesForThisCamp = allsPieceW;
+            AllsPiecesForThisCamp = allsPieceB;
             return true;
         }
         return false;

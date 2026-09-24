@@ -1,6 +1,6 @@
 namespace ChessTeam.ChessLogical.Tableaux;
 
-internal static class Tableau
+public static class Tableaux
 {
     public enum Carreau
     {
@@ -100,7 +100,7 @@ internal static class Tableau
 
     public static Carreau GetCarreau(ChessPosition position)
     {
-        foreach (var car in Carreaux)
+        foreach (KeyValuePair<Carreau, ChessPosition> car in Carreaux)
         {
             if (position.Equals(car.Value))
             {
@@ -109,8 +109,22 @@ internal static class Tableau
         }
         throw new ArgumentException("Pas de carreau pour cette position");
     }
-    public static ChessPosition GetPosition(Carreau carreau)
+    public static ChessPosition GetPosition(string? carString = null, Carreau? carreau = null)
     {
-        return Carreaux[carreau];
+        if(carString != null)
+        {
+            foreach (var r in Carreaux)
+            {
+                if (carString == r.Key.ToString())
+                {
+                    return Carreaux[r.Key];
+                }
+            }
+            throw new ArgumentException(null, nameof(carString));
+        }
+        Carreau rr = carreau?? throw new ArgumentException(null, nameof(carreau));
+
+        return Carreaux[rr];
     }
 }
+
